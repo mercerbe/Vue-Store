@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="referrer" content="never" />
@@ -13,28 +14,33 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="public/style.css">
 </head>
+
 <body>
-<div id="app">
-    <div class="header">
-        <h1>Gif Store</h1>
-    </div>
-    <div class="main">
-        <div class="products">
-            <button @click="addToCart">update cart</button>
+    <div id="app">
+        <div class="header">
+            <h1>Gif Store</h1>
         </div>
-        <div class="cart">
-            <h2>Shopping Cart</h2>
-            <hr>
-            <div>
-                Total: {{total}}
+        <div class="main">
+            <div class="products">
+                <div v-for="product in products" :key="product.title" class="product">
+                    {{ product.title }}
+                </div>
+                <button @click="addToCart">update cart</button>
+            </div>
+            <div class="cart">
+                <h2>Shopping Cart</h2>
+                <hr>
+                <div>
+                    Total: {{ total }}
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Scripts -->
-<script src="/reload/reload.js"></script>
-<script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
-<script type="text/javascript" src="public/script.js"></script>
+    <!-- Scripts -->
+    <script src="/reload/reload.js"></script>
+    <script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="public/script.js"></script>
 </body>
+
 </html>
