@@ -2,6 +2,7 @@ console.log('New Vue Instance');
 new Vue({
     el: "#app",
     data: {
+        search: "",
         total: 0,
         products: [{
                 title: "test 1",
@@ -22,14 +23,17 @@ new Vue({
         cart: []
     },
     methods: {
+        submitSearch: function () {
+
+        },
         addToCart: function (product) {
             this.total += product.price;
-            let found = false;
-            for (let i = 0; i < this.cart.length; i++) {
-                if (this.cart[i].id === product.id)
+            var found = false;
+            for (var i = 0; i < this.cart.length; i++) {
+                if (this.cart[i].id === product.id) {
                     this.cart[i].qty++;
-                found = true;
-
+                    found = true;
+                }
             }
             if (!found) {
                 this.cart.push({
@@ -39,6 +43,23 @@ new Vue({
                     qty: 1
                 });
             }
+        },
+        inc: function (product) {
+            product.qty++;
+            this.total += product.price;
+        },
+        dec: function (product) {
+            product.qty--;
+            this.total -= product.price;
+            if (product.qty <= 0) {
+                let i = this.cart.indexOf(product);
+                this.cart.splice(i, 1);
+            }
+        }
+    },
+    filters: {
+        currency: function (price) {
+            return "$".concat(price.toFixed(2));
         }
     }
 });

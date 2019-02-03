@@ -19,6 +19,10 @@
     <div id="app">
         <div class="header">
             <h1>Gif Store</h1>
+            <form action="" class="searchbar" v-on:submit.prevent="submitSearch">
+                <input type="text" placeholder="Search for Gifs" required v-model="search" />
+                <input type="submit" class="btn" value="search" />
+            </form>
         </div>
         <div class="main">
             <div class="products">
@@ -32,12 +36,14 @@
                 <ul>
                     <li v-for="product in cart">
                         <div class="item-title">{{product.title}}</div>
-                        <span class="item-qty">{{product.price}} x {{product.qty}}</span>
+                        <span class="item-qty">{{product.price | currency}} x {{product.qty}}</span>
+                        <button class="btn" @click="inc(product)">+</button>
+                        <button class="btn" @click="dec(product)">-</button>
                     </li>
                 </ul>
                 <div v-if="cart.length">
                     <hr>
-                    <div class="cart-total">Total: {{ total }}</div>
+                    <div class="cart-total">Total: {{ total | currency }}</div>
                 </div>
                 <div v-else class="empty-cart">
                     No items in the cart.
