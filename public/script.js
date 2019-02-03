@@ -24,7 +24,13 @@ new Vue({
     },
     methods: {
         submitSearch: function () {
-
+            //$ denotes plugin
+            var path = "/search?q=".concat(this.search)
+            this.$http
+                .get(path)
+                .then(function (res) {
+                    console.log(res)
+                })
         },
         addToCart: function (product) {
             this.total += product.price;
